@@ -44,9 +44,6 @@
                                                     data-toggle="modal" data-target="#exampleModal<%= articulo.getCodigo()%>"
                                                     type="button"                                                    
                                                     >Agregar</button>
-                                            <button class="btn btn-danger mt-2"
-                                                    type="button"
-                                                    >Quitar</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal<%= articulo.getCodigo()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -73,11 +70,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                             <button type="submit" class="btn btn-primary"
                                                                     name="nombre"
                                                                     value="<%= articulo.getDescripcion()%>"
-                                                                    >Save changes</button>
+                                                                    >Agregar al carrito</button>
                                                         </div>
                                                     </div>
                                                 </div>

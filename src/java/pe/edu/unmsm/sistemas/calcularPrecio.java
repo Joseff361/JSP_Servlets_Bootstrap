@@ -59,6 +59,24 @@ public class calcularPrecio extends HttpServlet {
                 session.setAttribute("precioFinal", new Double(precioFinal));
                 session.setAttribute("productos", carrito);
 
+                //Metodo de Pago
+                if (request.getParameter("modalidad") != null) {
+                    String msg = "";
+                    VaciarCarrito vaciarCarrito = new VaciarCarrito();
+                    String modalidad = request.getParameter("modalidad");
+                    if (modalidad.equals("tarjeta")) {
+                        msg = vaciarCarrito.pagar(new TarjetaDeCreditoStrategy(), session.getAttribute("precioFinal").toString());
+                    } else {
+                        msg = vaciarCarrito.pagar(new PaypalStrategy(), session.getAttribute("precioFinal").toString());
+                    }
+                    //Vaciar carrito
+                     for (Iterator<Item> iterator = carrito.getItems().iterator(); iterator.hasNext();) {
+                        Item item = iterator.next();
+                        iterator.remove();
+                    }
+                    session.setAttribute("modalidad", msg);
+                }
+
             }
         }
 

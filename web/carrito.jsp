@@ -4,6 +4,9 @@
     Author     : Usuario
 --%>
 
+<%@page import="pe.edu.unmsm.sistemas.PaypalStrategy"%>
+<%@page import="pe.edu.unmsm.sistemas.TarjetaDeCreditoStrategy"%>
+<%@page import="pe.edu.unmsm.sistemas.VaciarCarrito"%>
 <%@page import="pe.edu.unmsm.sistemas.Carrito"%>
 <%@page import="pe.edu.unmsm.sistemas.Item"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,10 +32,45 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="text-center">
-                                        <p>Precio Final: S/.<%=session.getAttribute("precioFinal")%></p>
-                                        <button class="btn btn-success">Pago con tarjeta</button>
-                                        <br><br>
-                                        <button class="btn btn-warning">Pago mediante paypal</button>
+                                        <form action="calcularPrecio" method="get">
+                                            <%
+                                                String precio = "0.0";
+                                                if (session.getAttribute("precioFinal") != null) {
+                                                    precio = session.getAttribute("precioFinal").toString();
+                                                }
+                                            %>
+                                            <p>Precio Final: S/.<%=precio%></p>
+                                            <button class="btn btn-success"
+                                                    type="submit"
+                                                    value="tarjeta"
+                                                    name="modalidad"
+                                                    >Pago con tarjeta</button>
+                                            <br><br>
+                                            <button class="btn btn-warning"
+                                                    type="submit"
+                                                    value="paypal"
+                                                    name="modalidad"
+                                                    >Pago mediante paypal</button>
+                                        </form>
+                                        <%
+                                            String msg = "";
+                                            if (session.getAttribute("modalidad") != null) {
+                                                msg = session.getAttribute("modalidad").toString();
+                                            }
+                                            if (session.getAttribute("carrito") != null) {
+                                                Carrito carrito = (Carrito) session.getAttribute("carrito");
+                                                System.out.println("==========" + carrito.getItems().toString());
+                                                if (!msg.equals("") && carrito.getItems().toString().equals("[]")) {
+                                        %>
+                                        <br>
+                                        <div class="alert alert-success" role="alert">
+                                            <%=msg%>
+                                        </div>
+                                        <%
+                                                }
+                                            }
+                                            session.setAttribute("modalidad", "");
+                                        %>
                                     </div>
                                 </div>  
                                 <div class="col-md-7 text-center table">
@@ -46,11 +84,12 @@
                                         </tr>
                                         <tr>
                                             <%
-                                                if (session.getAttribute("productos") != null) {
-                                                    Carrito carrito = (Carrito) session.getAttribute("productos");
-                                                    if (carrito != null) {
-                                                        for (Item item : carrito.getItems()) {
-                                                            double totalParcial = item.getCantidad() * item.getPrecio();
+                                                if (session != null) {
+                                                    if (session.getAttribute("productos") != null) {
+                                                        Carrito carrito = (Carrito) session.getAttribute("productos");
+                                                        if (carrito != null) {
+                                                            for (Item item : carrito.getItems()) {
+                                                                double totalParcial = item.getCantidad() * item.getPrecio();
                                             %>
                                             <td><%=item.getNombre()%></td>
                                             <td><%=item.getPrecio()%></td>
@@ -67,6 +106,7 @@
 
                                         </tr>
                                         <%
+                                                        }
                                                     }
                                                 }
                                             }
