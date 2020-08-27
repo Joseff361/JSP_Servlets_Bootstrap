@@ -4,6 +4,8 @@
     Author     : Usuario
 --%>
 
+<%@page import="pe.edu.unmsm.sistemas.Item"%>
+<%@page import="pe.edu.unmsm.sistemas.Carrito"%>
 <%@page import="pe.edu.unmsm.sistemas.Articulo"%>
 <%@page import="pe.edu.unmsm.sistemas.Articulos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -113,9 +115,22 @@
                     </div>
                     <%
                         }
-                        String codigo = request.getParameter("codigo");
-                        String cantidad = request.getParameter("cantidad");
-                        out.println(codigo + cantidad);
+                        Carrito carrito = (Carrito) session.getAttribute("carrito");
+                        //Verificando si es que existe la instancia de "Carrito"
+                        if (carrito == null) {
+                            System.out.println("Creando el carrito en la sesion desde index.jsp");
+                            carrito = new Carrito();
+                            session.setAttribute("carrito", carrito);
+                        } else {
+                            //Obteniendo valores via post
+                            String codigo = request.getParameter("codigo");
+                            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                            out.println(codigo + cantidad);
+
+                            Item item = new Item(codigo, cantidad);
+                            carrito.agregarItem(item);
+                        }
+                        out.println(carrito.toString());
                     %>
                 </div>
             </div>

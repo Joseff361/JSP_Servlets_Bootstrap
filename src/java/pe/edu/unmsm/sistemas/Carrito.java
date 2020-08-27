@@ -13,22 +13,23 @@ import java.util.ArrayList;
  */
 public class Carrito {
     
-    private ArrayList<String> items = null;
+    private ArrayList<Item> items = null;
 
     public Carrito() {
         items = new ArrayList<>();
     }
 
-    public ArrayList<String> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<String> items) {
-        this.items = items;
+    public void agregarItem(Item item) {
+        this.items.add(item);
     }
-    
-    public String agregar(String item){
-        return item;
+
+    @Override
+    public String toString() {
+        return "Carrito{" + "items=" + items + '}';
     }
     
     
