@@ -20,7 +20,7 @@ public class Carrito {
     }
 
     public ArrayList<Item> getItems() {
-        return items;
+        return this.items;
     }
 
     public void agregarItem(Item item) {
@@ -32,5 +32,11 @@ public class Carrito {
         return "Carrito{" + "items=" + items + '}';
     }
     
+    public void eliminarItem(Item item){
+//        int indice = this.items.indexOf(item);
+        System.out.println("NombreCarrito" + item.getNombre());
+//        System.out.println("Indice: " + indice);
+        this.items.remove(item);
+    }
     
 }

@@ -10,20 +10,22 @@ package pe.edu.unmsm.sistemas;
  * @author Usuario
  */
 public class Item {
-    private String codigo;
+    private String nombre;
     private int cantidad;
+    private double precio;
 
-    public Item(String codigo, int cantidad) {
-        this.codigo = codigo;
+    public Item(String nombre, int cantidad, double precio) {
+        this.nombre = nombre;
         this.cantidad = cantidad;
+        this.precio = precio;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setNombre(String codigo) {
+        this.nombre = nombre;
     }
 
     public int getCantidad() {
@@ -32,6 +34,14 @@ public class Item {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
     
     

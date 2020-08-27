@@ -16,7 +16,7 @@
                 <a class="nav-link" href="/MiniProyecto/index.jsp">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/MiniProyecto/carrito.jsp">Ver carrito</a>
+                <a class="nav-link" href="/MiniProyecto/calcularPrecio">Ver carrito</a>
             </li>
         </ul>
         <span class="navbar-text">

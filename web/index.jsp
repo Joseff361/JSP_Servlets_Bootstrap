@@ -26,7 +26,7 @@
                 <div class="row">
                     <%
                         Articulos catalogo = Articulos.Singleton();
-                        for (Articulo item : catalogo.getArticulos()) {
+                        for (Articulo articulo : catalogo.getArticulos()) {
                     %>
                     <div class="col-md-4">
                         <div class="card my-2">
@@ -37,18 +37,18 @@
                                 <div class="row">
                                     <div class="col-md-7">
                                         <form action="index.jsp" method="get">
-                                            <p><strong>Producto: </strong><%= item.getDescripcion()%> </p>
-                                            <p><strong>Precio: </strong>S/. <%= item.getPrecioDeVenta()%> </p>
-                                            <p><strong>Stock: </strong> <%= item.getStock()%> </p>
+                                            <p><strong>Producto: </strong><%= articulo.getDescripcion()%> </p>
+                                            <p><strong>Precio: </strong>S/. <%= articulo.getPrecioDeVenta()%> </p>
+                                            <p><strong>Stock: </strong> <%= articulo.getStock()%> </p>
                                             <button class="btn btn-primary mt-2" 
-                                                    data-toggle="modal" data-target="#exampleModal<%= item.getCodigo()%>"
-                                                    type="button"
+                                                    data-toggle="modal" data-target="#exampleModal<%= articulo.getCodigo()%>"
+                                                    type="button"                                                    
                                                     >Agregar</button>
                                             <button class="btn btn-danger mt-2"
                                                     type="button"
                                                     >Quitar</button>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal<%= item.getCodigo()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModal<%= articulo.getCodigo()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -59,6 +59,14 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="form-group">
+                                                                <label>Precio: </label>
+                                                                <input class="form-control" value="<%=articulo.getPrecioDeVenta()%>"
+                                                                       name="precio"
+                                                                       readonly
+                                                                       ></input>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Cantidad: </label>
                                                                 <input class="form-control" type="number"
                                                                        name="cantidad"
                                                                        ></input>
@@ -67,8 +75,8 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-primary"
-                                                                    name="codigo"
-                                                                    value="<%= item.getCodigo()%>"
+                                                                    name="nombre"
+                                                                    value="<%= articulo.getDescripcion()%>"
                                                                     >Save changes</button>
                                                         </div>
                                                     </div>
@@ -77,7 +85,7 @@
                                         </form>
                                     </div>
                                     <div clas="col-md-5">
-                                        <img src="/MiniProyecto/imagenes/<%= item.getUrl()%>.jpg" width="140" height="155">
+                                        <img src="/MiniProyecto/imagenes/<%= articulo.getUrl()%>.jpg" width="140" height="155">
                                     </div>                              
                                 </div>
                             </div>
@@ -94,17 +102,23 @@
                         } else {
                             //Obteniendo valores via post
 
-                            if (request.getParameter("codigo") != null && request.getParameter("cantidad") != null) {
-                                if ( !request.getParameter("cantidad").equals("") ) {
-                                    String codigo = request.getParameter("codigo");
+                            if (request.getParameter("nombre") != null && request.getParameter("cantidad") != null && request.getParameter("precio") != null) {
+                                if (!request.getParameter("cantidad").equals("") && !request.getParameter("precio").equals("")) {
+                                    
+                                    //Obteniendo parametros
+                                    String nombre = request.getParameter("nombre");
                                     int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-                                    out.println(codigo + cantidad);
-                                    Item item = new Item(codigo, cantidad);
+                                    double precio = Double.parseDouble(request.getParameter("precio"));
+                                    out.println(nombre + cantidad + precio);
+                                    
+                                    //Agregando item al carrito
+                                    Item item = new Item(nombre, cantidad, precio);
                                     carrito.agregarItem(item);
                                 }
                             }
                         }
                         out.println(carrito.toString());
+                        //Agregando el carrito como atributo de sesion
                         session.setAttribute("productos", carrito);
                     %>
                 </div>
