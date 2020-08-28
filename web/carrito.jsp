@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="pe.edu.unmsm.sistemas.Usuario"%>
 <%@page import="pe.edu.unmsm.sistemas.PaypalStrategy"%>
 <%@page import="pe.edu.unmsm.sistemas.TarjetaDeCreditoStrategy"%>
 <%@page import="pe.edu.unmsm.sistemas.VaciarCarrito"%>
@@ -28,6 +29,16 @@
                 <div class="col-md-7 mx-auto">
                     <div class="card">
                         <h1 class="text-center">Carrito de Compras</h1>
+                        <%
+                        Usuario usuario = (Usuario)(session.getAttribute("usuario"));
+                        %>
+                        <p>Cliente: <%= usuario.getNombre1() +  " " + usuario.getNombre2() + " " + usuario.getApellido() %></p>
+                        <p>Enviar a: <%= usuario.getDireccion() %></p>
+                        <p>Datos de la tarjeta:</p>
+                        <p>*Numero: <%= usuario.getTarjeta().getNumero() %></p>
+                        <p>*Fecha vencimiento: <%= usuario.getTarjeta().getMesVencimiento()+"/"+ usuario.getTarjeta().getAnioVencimiento()%></p>
+                        <p>*CVV: <%= usuario.getTarjeta().getCVV() %></p>
+                        
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5">

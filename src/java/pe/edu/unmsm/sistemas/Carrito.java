@@ -39,4 +39,19 @@ public class Carrito {
         this.items.remove(item);
     }
     
+    public Item getItem(String nombre){
+        for (Item item: this.items){
+            if(item.getNombre().equals(nombre)){
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    public void actualizarCantidadItem(String nombre, int cantidad){
+        Item item = getItem(nombre);
+        if(item!=null){
+            item.setCantidad(cantidad);
+        }
+    }
 }

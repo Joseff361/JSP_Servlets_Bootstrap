@@ -26,6 +26,7 @@
                 <div class="row">
                     <%
                         Articulos catalogo = Articulos.Singleton();
+                        Carrito carrito = (Carrito) session.getAttribute("carrito");
                         for (Articulo articulo : catalogo.getArticulos()) {
                     %>
                     <div class="col-md-4">
@@ -36,7 +37,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <form action="index.jsp" method="get">
+                                        <form action="index.jsp" method="post">
                                             <p><strong>Producto: </strong><%= articulo.getDescripcion()%> </p>
                                             <p><strong>Precio: </strong>S/. <%= articulo.getPrecioDeVenta()%> </p>
                                             <p><strong>Stock: </strong> <%= articulo.getStock()%> </p>
@@ -64,8 +65,14 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Cantidad: </label>
+                                                                <%
+                                                                    int cantidad = 0;
+                                                                    if (carrito != null && carrito.getItem(articulo.getDescripcion()) != null) {
+                                                                        cantidad = carrito.getItem(articulo.getDescripcion()).getCantidad();
+                                                                    }
+                                                                %>
                                                                 <input class="form-control" type="number"
-                                                                       name="cantidad"
+                                                                       name="cantidad" value="<%=cantidad%>"
                                                                        ></input>
                                                             </div>
                                                         </div>
@@ -90,7 +97,7 @@
                     </div>
                     <%
                         }
-                        Carrito carrito = (Carrito) session.getAttribute("carrito");
+
                         //Verificando si es que existe la instancia de "Carrito"
                         if (carrito == null) {
                             System.out.println("Creando el carrito en la sesion desde index.jsp");
@@ -100,17 +107,25 @@
                             //Obteniendo valores via post
 
                             if (request.getParameter("nombre") != null && request.getParameter("cantidad") != null && request.getParameter("precio") != null) {
-                                if (!request.getParameter("cantidad").equals("") && !request.getParameter("precio").equals("")) {
-                                    
+                                if (!request.getParameter("cantidad").equals("") && !request.getParameter("cantidad").equals("0") && !request.getParameter("precio").equals("")) {
+
                                     //Obteniendo parametros
                                     String nombre = request.getParameter("nombre");
                                     int cantidad = Integer.parseInt(request.getParameter("cantidad"));
                                     double precio = Double.parseDouble(request.getParameter("precio"));
                                     out.println(nombre + cantidad + precio);
-                                    
+
                                     //Agregando item al carrito
-                                    Item item = new Item(nombre, cantidad, precio);
-                                    carrito.agregarItem(item);
+                                    if (carrito.getItem(nombre) == null) {
+                                        Item item = new Item(nombre, cantidad, precio);
+                                        carrito.agregarItem(item);
+                                    } else {
+                                        carrito.actualizarCantidadItem(nombre, cantidad);
+                                    }
+                                } else {
+                    %>
+                    <script>alert("El campo cantidad debe ser mayor a 0");</script>
+                    <%
                                 }
                             }
                         }
