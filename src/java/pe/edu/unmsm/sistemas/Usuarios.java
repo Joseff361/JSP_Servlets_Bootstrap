@@ -29,5 +29,12 @@ public class Usuarios {
         this.usuarios = usuarios;
     }
     
+    public Usuario getUserByCredentials(String username, String password){
+        for(Usuario user: usuarios){
+            if(user.getUsername().equals(username) && user.getPassword().equals(password))
+                return user;
+        }
+        return null;
+    }
     
 }

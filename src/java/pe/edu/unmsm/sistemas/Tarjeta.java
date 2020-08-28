@@ -12,16 +12,16 @@ package pe.edu.unmsm.sistemas;
 public class Tarjeta {
     String numero;
     int mesVencimiento;
-    int diaVencimiento;
+    int anioVencimiento;
     int CVV;
 
     public Tarjeta() {
     }
 
-    public Tarjeta(String numero, int mesVencimiento, int diaVencimiento, int CVV) {
+    public Tarjeta(String numero, int mesVencimiento, int anioVencimiento, int CVV) {
         this.numero = numero;
         this.mesVencimiento = mesVencimiento;
-        this.diaVencimiento = diaVencimiento;
+        this.anioVencimiento = anioVencimiento;
         this.CVV = CVV;
     }
 
@@ -41,12 +41,12 @@ public class Tarjeta {
         this.mesVencimiento = mesVencimiento;
     }
 
-    public int getDiaVencimiento() {
-        return diaVencimiento;
+    public int getAnioVencimiento() {
+        return anioVencimiento;
     }
 
-    public void setDiaVencimiento(int diaVencimiento) {
-        this.diaVencimiento = diaVencimiento;
+    public void setDiaVencimiento(int anioVencimiento) {
+        this.anioVencimiento = anioVencimiento;
     }
 
     public int getCVV() {
