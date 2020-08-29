@@ -7,7 +7,6 @@ package pe.edu.unmsm.sistemas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Usuario
  */
-@WebServlet(name = "calcularPrecio", urlPatterns = {"/calcularPrecio"})
-public class calcularPrecio extends HttpServlet {
+@WebServlet(name = "admitirUsuario", urlPatterns = {"/admitirUsuario"})
+public class admitirUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,62 +35,31 @@ public class calcularPrecio extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("productos") != null) {
-            Carrito carrito = (Carrito) session.getAttribute("productos");
+        
+        if (request.getParameter("username") != null && request.getParameter("password") != null) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
 
-            if (carrito != null) {
-                //Actualizando items
-                if (request.getParameter("eliminar") != null) {
-                    for (Iterator<Item> iterator = carrito.getItems().iterator(); iterator.hasNext();) {
-                        Item item = iterator.next();
-                        if (item.getNombre().equals(request.getParameter("eliminar"))) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                //Precio final como atributo de sesion
-                double precioFinal = 0.0;
-                for (Item item : carrito.getItems()) {
-                    precioFinal += (item.getCantidad() * item.getPrecio());
-                }
-
-                session.setAttribute("precioFinal", new Double(precioFinal));
-                session.setAttribute("productos", carrito);
-
-                //Metodo de Pago
-                if (request.getParameter("modalidad") != null) {
-                    String msg = "";
-                    VaciarCarrito vaciarCarrito = new VaciarCarrito();
-                    String modalidad = request.getParameter("modalidad");
-                    if (modalidad.equals("tarjeta")) {
-                        msg = vaciarCarrito.pagar(new TarjetaDeCreditoStrategy(), session.getAttribute("precioFinal").toString());
-                    } else {
-                        msg = vaciarCarrito.pagar(new PaypalStrategy(), session.getAttribute("precioFinal").toString());
-                    }
-                    //Vaciar carrito
-                     for (Iterator<Item> iterator = carrito.getItems().iterator(); iterator.hasNext();) {
-                        Item item = iterator.next();
-                        iterator.remove();
-                    }
-                    session.setAttribute("precioFinal", 0.0);
-                    session.setAttribute("modalidad", msg);
-                }
-
+            Usuarios usuarios = Usuarios.Singleton();
+            Usuario loggedUser = usuarios.getUserByCredentials(username, password);
+            if (loggedUser != null) {
+                session.setAttribute("usuario", loggedUser);
+                response.sendRedirect("/MiniProyecto/catalogo.jsp");
+            } else {
+                System.out.println("Login fallido");
+                response.sendRedirect("/MiniProyecto/index.jsp");
             }
         }
-
-        response.sendRedirect("/MiniProyecto/carrito.jsp");
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet calcularPreci</title>");
+            out.println("<title>Servlet admitirUsuario</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet calcularPreci at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet admitirUsuario at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

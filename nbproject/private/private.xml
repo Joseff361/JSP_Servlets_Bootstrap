@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Item.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Usuario.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/web/css/login.css</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Articulos.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/PaymentStrategy.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/PaypalStrategy.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/web/login.jsp</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/TarjetaDeCreditoStrategy.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/web/nabvar.jsp</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/web/index.jsp</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/calcularPrecio.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Tarjeta.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/web/carrito.jsp</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Carrito.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Articulo.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/Usuarios.java</file>
-            <file>file:/C:/Users/LuisGerman/Google%20Drive/7mo_ciclo_aka_cuarentena/patrones/semana_12/MiniProyecto/src/java/pe/edu/unmsm/sistemas/VaciarCarrito.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/MiniProyecto/web/catalogo.jsp</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/MiniProyecto/src/java/pe/edu/unmsm/sistemas/calcularPrecio.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/MiniProyecto/web/carrito.jsp</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/MiniProyecto/src/java/pe/edu/unmsm/sistemas/admitirUsuario.java</file>
         </group>
     </open-files>
 </project-private>

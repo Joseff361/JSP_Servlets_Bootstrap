@@ -10,15 +10,15 @@ package pe.edu.unmsm.sistemas;
  * @author LuisGerman
  */
 public class Usuario {
-    String nombre1;
-    String nombre2;
-    String apellido;
-    String email;
-    String username;
-    String password;
-    String direccion;
-    int codigoPostal;
-    Tarjeta tarjeta;
+    private String nombre1;
+    private String nombre2;
+    private String apellido;
+    private String email;
+    private String username;
+    private String password;
+    private String direccion;
+    private int codigoPostal;
+    private Tarjeta tarjeta;
 
     public Usuario() {
     }

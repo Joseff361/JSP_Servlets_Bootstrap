@@ -29,16 +29,6 @@
                 <div class="col-md-7 mx-auto">
                     <div class="card">
                         <h1 class="text-center">Carrito de Compras</h1>
-                        <%
-                        Usuario usuario = (Usuario)(session.getAttribute("usuario"));
-                        %>
-                        <p>Cliente: <%= usuario.getNombre1() +  " " + usuario.getNombre2() + " " + usuario.getApellido() %></p>
-                        <p>Enviar a: <%= usuario.getDireccion() %></p>
-                        <p>Datos de la tarjeta:</p>
-                        <p>*Numero: <%= usuario.getTarjeta().getNumero() %></p>
-                        <p>*Fecha vencimiento: <%= usuario.getTarjeta().getMesVencimiento()+"/"+ usuario.getTarjeta().getAnioVencimiento()%></p>
-                        <p>*CVV: <%= usuario.getTarjeta().getCVV() %></p>
-                        
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5">
@@ -51,37 +41,91 @@
                                                 }
                                             %>
                                             <p>Precio Final: S/.<%=precio%></p>
-                                            <button class="btn btn-success"
-                                                    type="submit"
+                                            <button type="button" class="btn btn-danger btn-lg"
                                                     value="tarjeta"
                                                     name="modalidad"
-                                                    >Pago con tarjeta</button>
-                                            <br><br>
-                                            <button class="btn btn-warning"
-                                                    type="submit"
-                                                    value="paypal"
-                                                    name="modalidad"
-                                                    >Pago mediante paypal</button>
-                                        </form>
-                                        <%
-                                            String msg = "";
-                                            if (session.getAttribute("modalidad") != null) {
-                                                msg = session.getAttribute("modalidad").toString();
-                                            }
-                                            if (session.getAttribute("carrito") != null) {
-                                                Carrito carrito = (Carrito) session.getAttribute("carrito");
-                                                System.out.println("==========" + carrito.getItems().toString());
-                                                if (!msg.equals("") && carrito.getItems().toString().equals("[]")) {
-                                        %>
-                                        <br>
-                                        <div class="alert alert-success" role="alert">
-                                            <%=msg%>
-                                        </div>
-                                        <%
+                                                    data-toggle="modal" data-target="#completarTransaccion"
+                                                    >Confirmar Pago</button>
+
+
+                                            <!--Modal-->
+                                            <div class="modal fade" id="completarTransaccion" tabindex="-1" role="dialog" aria-labelledby="completarTransaccion" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">DATOS DE USUARIO</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <%
+                                                                if (session.getAttribute("usuario") != null) {
+                                                                    Usuario usuario = (Usuario) (session.getAttribute("usuario"));
+                                                            %>
+                                                            <p><strong>Cliente: </strong><%= usuario.getNombre1() + " " + usuario.getNombre2() + " " + usuario.getApellido()%></p>
+                                                            <p><strong>Direccion de envio: </strong><%= usuario.getDireccion()%></p>
+                                                            <p><strong>Datos de la tarjeta </strong></p>
+                                                            <p><strong>Numero: </strong><%= usuario.getTarjeta().getNumero()%></p>
+                                                            <p><strong>Fecha vencimiento: </strong><%= usuario.getTarjeta().getMesVencimiento() + "/" + usuario.getTarjeta().getAnioVencimiento()%></p>
+                                                            <p><strong>CVV: </strong><%= usuario.getTarjeta().getCVV()%></p>
+                                                            <%
+                                                                }
+                                                            %>   
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <div class="text-center">
+                                                                            <button class="btn btn-warning btn-lg"
+                                                                                    type="submit"
+                                                                                    value="paypal"
+                                                                                    name="modalidad"
+                                                                                    >Pago mediante paypal</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <div class="text-center">
+                                                                            <button class="btn btn-success btn-lg"
+                                                                                    type="submit"
+                                                                                    value="tarjeta"
+                                                                                    name="modalidad"
+                                                                                    >Pago mediante tarjeta</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Pago exitoso-->
+                                            <%
+                                                String msg = "";
+                                                if (session.getAttribute("modalidad") != null) {
+                                                    msg = session.getAttribute("modalidad").toString();
                                                 }
-                                            }
-                                            session.setAttribute("modalidad", "");
-                                        %>
+                                                if (session.getAttribute("carrito") != null) {
+                                                    Carrito carrito = (Carrito) session.getAttribute("carrito");
+                                                    if (!msg.equals("") && carrito.getItems().toString().equals("[]")) {
+                                            %>
+                                            <br>
+                                            <br>
+                                            <div class="alert alert-success" role="alert">
+                                                <%=msg%>
+                                            </div>
+                                            <%
+                                                    }
+                                                }
+                                                session.setAttribute("modalidad", "");
+                                            %>
+
+                                        </form>
+
                                     </div>
                                 </div>  
                                 <div class="col-md-7 text-center table">
