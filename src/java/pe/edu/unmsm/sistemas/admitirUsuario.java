@@ -44,7 +44,10 @@ public class admitirUsuario extends HttpServlet {
             Usuario loggedUser = usuarios.getUserByCredentials(username, password);
             if (loggedUser != null) {
                 session.setAttribute("usuario", loggedUser);
+                Carrito carrito = new Carrito();
+                session.setAttribute("carrito", carrito);
                 response.sendRedirect("/MiniProyecto/catalogo.jsp");
+               
             } else {
                 System.out.println("Login fallido");
                 response.sendRedirect("/MiniProyecto/index.jsp");

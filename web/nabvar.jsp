@@ -20,7 +20,7 @@
             </li>
         </ul>
         <span class="navbar-text">
-            Llena tu carrito de compras!
+            <a id="salir" class="nav-link" href="index.jsp" role="button" name="salir">Salir</a>
         </span>
     </div>
 </nav>
